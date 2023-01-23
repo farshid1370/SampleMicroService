@@ -1,6 +1,7 @@
-﻿namespace Catalog.Infrastructure;
-
-public class Class1
+﻿namespace Catalog.Infrastructure
 {
+    public class Class1
+    {
 
+    }
 }

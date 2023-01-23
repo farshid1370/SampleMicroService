@@ -1,6 +1,7 @@
-﻿namespace Catalog.Domain;
-
-public class Class1
+﻿namespace Catalog.Domain
 {
+    public class Class1
+    {
 
+    }
 }

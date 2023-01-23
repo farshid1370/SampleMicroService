@@ -1,10 +1,11 @@
-﻿namespace Basket.Infrastructure;
-
-public class Class1
+﻿namespace Basket.Infrastructure
 {
-    public int test()
+    public class Class1
     {
-        var a = new Class2();
-        return 1;
+        public int test()
+        {
+            var a = new Class2();
+            return 1;
+        }
     }
 }

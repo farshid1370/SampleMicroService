@@ -1,4 +1,6 @@
-﻿namespace Basket.Domain;
-public class Class1
+﻿namespace Basket.Domain
 {
+    public class Class1
+    {
+    }
 }
