@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+option csharp_namespace = "Catalog.API.Grpc.Proto";
+
+import "google/api/annotations.proto";
+
+service Catalog{
+  rpc GetCatalog(CatalogItemRequest)returns (CatalogItemResponse){
+      option (google.api.http)={
+          get:"/catalog/{id}"
+      };
+  }
+  rpc GetCatalogItems(CatalogItemsRequest) returns (PagingCatalogItemsResponse){
+      option (google.api.http)={
+          get:"/catalogs/{pageNumber}/{pageSize}"
+      };
+  }
+  rpc CreateCatalog(CreateCatalogRequest) returns(CreateCatalogResponse){
+      option (google.api.http)={
+          post:"/catalog",
+          body:"*"
+      };
+  }
+  rpc UpdateCatalogNameAndPrice(UpdateCatalogNameAndPriceRequest)returns(UpdateCatalogNameAndPriceResponse){
+      option (google.api.http)={
+          patch:"/catalog",
+          body:"*"
+      };
+  }
+}
+
+message CreateCatalogRequest{
+	 string name =1;
+     int32 price =2;
+     string catalogTypeId =3;
+     int32 availableStock =4;
+     int32 minStockThreshold =5;
+     int32 maxStockThreshold =6;
+}
+message CreateCatalogResponse{
+    string id=1;
+}
+
+
+message UpdateCatalogNameAndPriceRequest{
+     string id = 1;
+     string name =2;
+     int32 price =3;
+}
+message UpdateCatalogNameAndPriceResponse{
+    
+}
+
+message CatalogItemRequest{
+    string id=1;
+}
+
+message CatalogItemsRequest{
+    int32 pageNumber=1;
+    int32 pageSize=2;
+}
+
+message CatalogItemResponse{
+    string id =1;
+    string name =2;
+   
+    int32 price =3;
+
+    string catalogTypeId =4;
+
+    int32 availableStock =5;
+
+    int32 minStockThreshold =6;
+
+    int32 maxStockThreshold =7;
+}
+message PagingCatalogItemsResponse{
+    int64 totalCount=1;
+    repeated CatalogItemResponse data=2;
+}
+
