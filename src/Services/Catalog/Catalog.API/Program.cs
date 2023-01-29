@@ -19,11 +19,10 @@ builder.Services.AddGrpc(options =>
 
 });
 
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1",
-        new OpenApiInfo { Title = "Catalog gRPC", Version = "v1" });
-});
+builder.Services.AddControllers();
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -33,19 +32,12 @@ builder.Services.RegisterInfrastructureServices();
 var app = builder.Build();
 
 
-
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalog gRPC V1");
-    });
+    app.UseSwaggerUI();
 }
 
-
-
-
 app.MapGrpcService<CatalogService>();
-
+app.MapControllers();
 app.Run();
