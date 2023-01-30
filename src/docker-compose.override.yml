@@ -1,16 +1,28 @@
 version: '3.4'
 
 services:
-  catalog-api:
+  catalogAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionString=Server=catalogDB;Database=CatalogDB;User Id=admin;Password=admin1234;
     ports:
       - "26110:80"
       - "26111:81"
-
-  basket-api:
+  catalogDB:
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "26112:5432"
+    volumes:
+      - postgresData:/var/lib/postgresql/data/
+  basketAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "26120:80"
       - "26121:81"
+volumes:
+  postgresData:
+    external: false

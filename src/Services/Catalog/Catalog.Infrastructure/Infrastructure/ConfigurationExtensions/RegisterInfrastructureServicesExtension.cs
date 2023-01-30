@@ -1,5 +1,5 @@
 ﻿
-namespace Catalog.Infrastructure.Infrastructure.ConfigurationExtension;
+namespace Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
 
 public static class RegisterInfrastructureServicesExtension
 {

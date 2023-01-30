@@ -1,8 +1,8 @@
 ﻿namespace Catalog.Domain.AggregatesModel.SupplierAggregate;
 
-public class SupplierAddress:ValueObject
+public class Address:ValueObject
 {
-    public SupplierAddress(string street, string city)
+    public Address(string street, string city)
     {
         Street = street;
         City = city;

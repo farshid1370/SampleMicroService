@@ -15,3 +15,8 @@ global using Catalog.API.Grpc.Services;
 global using Microsoft.AspNetCore.Server.Kestrel.Core;
 global using System.Net;
 global using System.Reflection;
+global using Catalog.API.Infrastructure.ConfigurationExtensions;
+global using Catalog.Infrastructure.Infrastructure;
+global using Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
+global using Catalog.Infrastructure;
+global using Host;

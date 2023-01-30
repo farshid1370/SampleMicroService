@@ -1,14 +1,23 @@
 version: '3.4'
 
 services:
-  catalog-api:
+
+  catalogAPI:
     image: ${DOCKER_REGISTRY-}catalogapi
+    container_name: catalogAPI
     build:
       context: .
       dockerfile: Services/Catalog/Catalog.API/Dockerfile
+    depends_on:
+      - catalogDB
 
-  basket-api:
+  catalogDB:
+    image: postgres
+    container_name: catalogDB
+
+  basketAPI:
     image: ${DOCKER_REGISTRY-}basketapi
+    container_name: basketAPI
     build:
       context: .
       dockerfile: Services/Basket/Basket.API/Dockerfile

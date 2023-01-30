@@ -1,16 +1,20 @@
 ﻿namespace Catalog.Domain.AggregatesModel.SupplierAggregate;
 
-public class SupplierItem
+public class SupplierItem : Entity
 {
-    public SupplierItem(Guid supplierId, int requestNumber, Guid catalogTypeId)
+    private Guid _id;
+    private Guid _supplierId;
+    private int _requestNumber;
+    private Guid _catalogTypeId;
+    public SupplierItem(Guid id, Guid supplierId, int requestNumber, Guid catalogTypeId)
     {
-        SupplierId = supplierId;
-        RequestNumber = requestNumber;
-        CatalogTypeId = catalogTypeId;
+        _id = id;
+        _supplierId = supplierId;
+        _requestNumber = requestNumber;
+        _catalogTypeId = catalogTypeId;
     }
-
-    public Guid SupplierId { get;private set; }
-    public int RequestNumber { get;private set; }
-
-    public Guid CatalogTypeId { get; private set; }
+    public Guid Id => _id;
+    public Guid SupplierId => _supplierId;
+    public int RequestNumber => _requestNumber;
+    public Guid CatalogTypeId => _catalogTypeId;
 }

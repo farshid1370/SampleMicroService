@@ -9,9 +9,7 @@
   <ItemGroup>
     <Folder Include="AggregatesModel\CatalogAggregate\" />
     <Folder Include="AggregatesModel\CatalogTypeAggregate\" />
-    <Folder Include="AggregatesModel\SupplierAggregate\" />
     <Folder Include="Exceptions\" />
-    <Folder Include="SeedWork\" />
   </ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="MediatR" Version="11.1.0" />

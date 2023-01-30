@@ -2,10 +2,13 @@
 
 public class CatalogType:Entity
 {
-    public CatalogType(string type)
+    private Guid _id;
+    private string _type;
+    public CatalogType(Guid id, string type)
     {
-        Type = type;
+        _id = id;
+        _type = type;
     }
-
-    public string Type { get;private set; }
+    public Guid Id => _id;
+    public string Type => _type;
 }

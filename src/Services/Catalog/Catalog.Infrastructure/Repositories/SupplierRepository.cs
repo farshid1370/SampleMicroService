@@ -3,31 +3,36 @@ using Catalog.Domain.SeedWork;
 
 namespace Catalog.Infrastructure.Repositories;
 
-public class SupplierRepository:ISupplierRepository
+public class SupplierRepository : ISupplierRepository
 {
-    public IUnitOfWork UnitOfWork { get; }
-    public Task<Supplier> Add(Supplier item)
+    private readonly CatalogContext _context;
+
+    public SupplierRepository(CatalogContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+    }
+
+    public IUnitOfWork UnitOfWork => _context;
+    public Supplier Add(Supplier item)
+    {
+        return _context.Suppliers.Add(item).Entity;
     }
 
     public void Update(Supplier item)
     {
-        throw new NotImplementedException();
+        _context.Entry(item).State = EntityState.Modified;
     }
 
-    public Task<IEnumerable<Supplier>> Get(Guid[] id)
+    public async Task<IEnumerable<Supplier>> GetByType(Guid typeId)
     {
-        throw new NotImplementedException();
+        var suppliers = await _context.Suppliers.Where(s => s.SupplierItems.Any(si => si.CatalogTypeId == typeId))
+            .ToListAsync();
+        return suppliers;
     }
 
-    public Task<IEnumerable<Supplier>> GetByType(Guid typeId)
+    public Task<Supplier> GetById(Guid id)
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<Supplier> GetById(int id)
-    {
-        throw new NotImplementedException();
+        var item = _context.Suppliers.FirstOrDefaultAsync(s => s.Id == id);
+        return item;
     }
 }

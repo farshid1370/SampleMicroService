@@ -4,81 +4,91 @@ namespace Catalog.Domain.AggregatesModel.CatalogAggregate;
 
 public class CatalogItem : Entity, IAggregateRoot
 {
-    public CatalogItem(string name, int price, Guid catalogTypeId, int availableStock, int minStockThreshold, int maxStockThreshold)
+    private Guid _id;
+    private string _name;
+    private int _price;
+    private Guid _catalogTypeId;
+    private int _availableStock;
+    private int _minStockThreshold;
+    private int _maxStockThreshold;
+    public CatalogItem(Guid id,string name, int price, Guid catalogTypeId, int availableStock, int minStockThreshold, int maxStockThreshold)
     {
-        Name = string.IsNullOrEmpty(name) ? throw new CatalogDomainException("The name is empty and must be entered") : name;
-        Price = price <= 0 ? throw new CatalogDomainException("The price must be than 0.") : price;
-        CatalogTypeId = catalogTypeId;
-        AvailableStock = availableStock;
-        if (MaxStockThreshold < AvailableStock)
+        _id= id;
+        _name = string.IsNullOrEmpty(name) ? throw new CatalogDomainException("The name is empty and must be entered") : name;
+        _price = price <= 0 ? throw new CatalogDomainException("The price must be than 0.") : price;
+        _catalogTypeId = catalogTypeId;
+        _availableStock = availableStock;
+        if (maxStockThreshold < availableStock)
         {
             throw new CatalogDomainException("Max stock threshold not must be less than available Stock");
         }
-        if (MaxStockThreshold < MinStockThreshold)
+        if (maxStockThreshold < minStockThreshold)
         {
             throw new CatalogDomainException("Max stock threshold not must be less than stock threshold");
         }
-        MinStockThreshold = minStockThreshold;
-        MaxStockThreshold = maxStockThreshold;
+        _minStockThreshold = minStockThreshold;
+        _maxStockThreshold = maxStockThreshold;
     }
-    public string Name { get; private set; }
-    public int Price { get; private set; }
-    public Guid CatalogTypeId { get; private set; }
-    public int AvailableStock { get; private set; }
-    public int MinStockThreshold { get; private set; }
-    public int MaxStockThreshold { get; private set; }
+
+    public Guid Id => _id;
+    public string Name => _name;
+    public int Price => _price;
+    public Guid CatalogTypeId => _catalogTypeId;
+    public int AvailableStock => _availableStock;
+    public int MinStockThreshold => _minStockThreshold;
+    public int MaxStockThreshold => _maxStockThreshold;
 
 
     public void UpdateName(string newName)
     {
-        Name = string.IsNullOrEmpty(newName) ? throw new CatalogDomainException("The new name is empty and must be entered") : newName;
+        _name = string.IsNullOrEmpty(newName) ? throw new CatalogDomainException("The new name is empty and must be entered") : newName;
     }
 
     public void UpdatePrice(int newPrice)
     {
         if (newPrice <= 0) throw new CatalogDomainException("The price must be than 0.");
-        if (newPrice != Price)
+        if (newPrice != _price)
         {
 
-            AddDomainEvent(new CatalogPriceChangedDomainEvent(newPrice, Price, this));
+            AddDomainEvent(new CatalogPriceChangedDomainEvent(newPrice, _price, this));
         }
 
-        Price = newPrice;
+        _price = newPrice;
     }
 
     public int AddStok(int quantity)
     {
-        var original = AvailableStock;
-        if (original + quantity > MaxStockThreshold)
+        var original = _availableStock;
+        if (original + quantity > _maxStockThreshold)
         {
-            AvailableStock = MaxStockThreshold;
+            _availableStock = _maxStockThreshold;
         }
         else
         {
-            AvailableStock += quantity;
+            _availableStock += quantity;
         }
 
-        return AvailableStock - original;
+        return _availableStock - original;
     }
 
     public int RemoveStock(int quantity)
     {
 
-        if (AvailableStock == 0)
+        if (_availableStock == 0)
         {
-            throw new CatalogDomainException($"Empty stock, product item {Name} is sold out");
+            throw new CatalogDomainException($"Empty stock, product item {_name} is sold out");
         }
 
-        if (AvailableStock - quantity < 0)
+        if (_availableStock - quantity < 0)
         {
             throw new CatalogDomainException($"Item units desired should be greater than zero");
         }
 
-        var removeQuantity = Math.Min(AvailableStock, quantity);
-        AvailableStock -= removeQuantity;
-        if (AvailableStock <= MinStockThreshold)
+        var removeQuantity = Math.Min(_availableStock, quantity);
+        _availableStock -= removeQuantity;
+        if (_availableStock <= _minStockThreshold)
         {
-            AddDomainEvent(new CatalogShortageHasOccurredDomainEvent(MaxStockThreshold - AvailableStock, this));
+            AddDomainEvent(new CatalogShortageHasOccurredDomainEvent(_maxStockThreshold - _availableStock, this));
         }
         return removeQuantity;
     }

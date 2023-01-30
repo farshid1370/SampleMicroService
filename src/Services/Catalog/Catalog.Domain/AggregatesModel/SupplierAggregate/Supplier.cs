@@ -2,25 +2,32 @@
 
 public class Supplier:Entity,IAggregateRoot
 {
+    private Guid _id;
+    private string _name;
+    private Address _address;
     private readonly List<SupplierItem> _supplierItems;
 
-    public Supplier(List<SupplierItem> supplierItems, string name, SupplierAddress address)
+    private Supplier(Guid id, string name)
     {
-        _supplierItems = supplierItems;
-        Name = name;
-        Address = address;
+        _id = id;
+        _supplierItems = new List<SupplierItem>();
+        _name = name;
     }
-
-    public string Name { get;private set; }
-    public SupplierAddress Address { get;private set; }
+    public Supplier(Guid id, string name, Address address):this(id,name)
+    {
+        _address = address;
+    }
+    public Guid Id => _id;
+    public string Name => _name;
+    public Address Address => _address;
     public IReadOnlyCollection<SupplierItem> SupplierItems => _supplierItems;
 
     public void SetName(string? newName)
     {
-        Name = newName ?? throw new CatalogDomainException("SupplierName is required");
+        _name = newName ?? throw new CatalogDomainException("SupplierName is required");
     }
     public void AddSupplierItem(Guid supplierId, Guid catalogItemId, int requestedNumber)
     {
-        _supplierItems.Add(new SupplierItem(supplierId,requestedNumber,catalogItemId));
+        _supplierItems.Add(new SupplierItem(new Guid(),supplierId,requestedNumber,catalogItemId));
     }
 }

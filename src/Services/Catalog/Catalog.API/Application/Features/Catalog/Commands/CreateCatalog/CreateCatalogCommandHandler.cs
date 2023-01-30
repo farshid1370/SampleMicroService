@@ -11,9 +11,9 @@ public class CreateCatalogCommandHandler:IRequestHandler<CreateCatalogCommand,Gu
 
     public async Task<Guid> Handle(CreateCatalogCommand request, CancellationToken cancellationToken)
     {
-        var catalogItem = new CatalogItem(request.Name, request.Price, request.CatalogTypeId, request.AvailableStock,
+        var catalogItem = new CatalogItem(new Guid(),request.Name, request.Price, request.CatalogTypeId, request.AvailableStock,
             request.MinStockThreshold, request.MaxStockThreshold);
-        await _catalogRepository.Add(catalogItem);
+        _catalogRepository.Add(catalogItem);
         await _catalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         return catalogItem.Id;
     }

@@ -3,36 +3,46 @@ using Catalog.Domain.SeedWork;
 
 namespace Catalog.Infrastructure.Repositories;
 
-public class CatalogRepository:ICatalogRepository
+public class CatalogRepository : ICatalogRepository
 {
-    public IUnitOfWork UnitOfWork { get; }
-    public Task<CatalogItem> Add(CatalogItem item)
+    private readonly CatalogContext _context;
+
+    public CatalogRepository(CatalogContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
+
+    }
+    public IUnitOfWork UnitOfWork => _context;
+    public CatalogItem Add(CatalogItem item)
+    {
+        return _context.Add(item).Entity;
+
     }
 
     public void Update(CatalogItem item)
     {
-        throw new NotImplementedException();
+        _context.Entry(item).State = EntityState.Modified;
     }
 
-    public Task<IEnumerable<CatalogItem>> Get(Guid[] ids)
+    public async Task<CatalogItem> GetById(Guid id)
     {
-        throw new NotImplementedException();
+        var item = await _context.CatalogItems.FirstOrDefaultAsync(c => c.Id == id);
+        return item;
     }
 
-    public Task<CatalogItem> GetById(Guid id)
+    public async Task<IEnumerable<CatalogItem>> GetByPaging(int pageSize, int PageNumber)
     {
-        throw new NotImplementedException();
+        var itemsOnPage = await _context.CatalogItems
+            .OrderBy(c => c.Name)
+            .Skip(pageSize * (PageNumber - 1))
+            .Take(pageSize)
+            .ToListAsync();
+        return itemsOnPage;
     }
 
-    public Task<IEnumerable<CatalogItem>> GetByPaging(int pageSize, int PageNumber)
+    public async Task<int> GetTotalCount()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<int> GetTotalCount()
-    {
-        throw new NotImplementedException();
+        var totalItems = await _context.CatalogItems.CountAsync();
+        return totalItems;
     }
 }
