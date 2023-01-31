@@ -19,4 +19,4 @@ global using Catalog.API.Infrastructure.ConfigurationExtensions;
 global using Catalog.Infrastructure.Infrastructure;
 global using Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
 global using Catalog.Infrastructure;
-global using Host;
+global using Common.Host;

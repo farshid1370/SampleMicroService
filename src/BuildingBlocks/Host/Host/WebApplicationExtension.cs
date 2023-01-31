@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace Host
+﻿namespace Common.Host
 {
     public static class WebApplicationExtension
     {
