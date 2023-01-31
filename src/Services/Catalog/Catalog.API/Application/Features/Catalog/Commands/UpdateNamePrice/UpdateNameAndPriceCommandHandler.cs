@@ -26,7 +26,7 @@ public class UpdateNameAndPriceCommandHandler:IRequestHandler<UpdateNameAndPrice
 
 
 
-        await _catalogRepository.UnitOfWork.SaveEntitiesAsync();
+        await _catalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         return Unit.Value;
     }
 }

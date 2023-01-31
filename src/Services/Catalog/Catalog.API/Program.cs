@@ -8,6 +8,8 @@ builder.Services.RegisterGrpcService();
 
 builder.Services.AddControllers();
 
+builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.RegisterSwaggerService();
 
 builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
@@ -24,6 +26,7 @@ if (app.Environment.IsDevelopment())
     app.SwaggerConfig();
 
 }
+
 app.MigrateDataBase<Program>((services) =>
 {
     var context = services.GetService<CatalogContext>();

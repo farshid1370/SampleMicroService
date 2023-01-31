@@ -1,24 +1,29 @@
-﻿using Catalog.Infrastructure.Repositories;
-
-namespace Catalog.API.Infrastructure.ConfigurationExtensions;
+﻿namespace Catalog.API.Infrastructure.ConfigurationExtensions;
 
 public static class ConfigSwaggerExtension
 {
-   
-        public static IServiceCollection RegisterSwaggerService(this IServiceCollection services)
+
+    public static IServiceCollection RegisterSwaggerService(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
         {
 
-        services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
-        return services;
+            var filePath = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+            if (File.Exists(filePath))
+            {
+                c.IncludeXmlComments(filePath);
+            }
         }
-        public static IApplicationBuilder SwaggerConfig(this IApplicationBuilder app)
-        {
 
+            );
+        return services;
+    }
+    public static IApplicationBuilder SwaggerConfig(this IApplicationBuilder app)
+    {
         app.UseSwagger();
         app.UseSwaggerUI();
         return app;
 
-        }
+    }
 
 }
