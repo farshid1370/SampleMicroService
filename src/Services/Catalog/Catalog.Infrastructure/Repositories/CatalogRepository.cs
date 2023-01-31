@@ -1,6 +1,4 @@
-﻿using Catalog.Domain.AggregatesModel.CatalogAggregate;
-using Catalog.Domain.SeedWork;
-
+﻿
 namespace Catalog.Infrastructure.Repositories;
 
 public class CatalogRepository : ICatalogRepository

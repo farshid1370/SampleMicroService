@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Catalog.Infrastructure.EntityConfigurations;
+﻿namespace Catalog.Infrastructure.EntityConfigurations;
 
 public class SupplierEntityConfiguration:IEntityTypeConfiguration<Supplier>
 {

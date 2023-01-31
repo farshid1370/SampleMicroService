@@ -1,4 +1,5 @@
 // Global using directives
+
 global using Catalog.Domain.AggregatesModel.CatalogAggregate;
 global using Catalog.Domain.AggregatesModel.SupplierAggregate;
 global using Catalog.Infrastructure.Repositories;
@@ -9,3 +10,8 @@ global using Catalog.Domain.SeedWork;
 global using Catalog.Infrastructure.EntityConfigurations;
 global using Catalog.Infrastructure.Infrastructure.Extensions;
 global using MediatR;
+global using Microsoft.EntityFrameworkCore.Design;
+global using Microsoft.EntityFrameworkCore.Infrastructure;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using Microsoft.EntityFrameworkCore.Migrations;
+global using Microsoft.Extensions.Configuration;

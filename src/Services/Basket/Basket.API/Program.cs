@@ -1,22 +1,38 @@
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.ConfigKestrel();
+
+builder.Services.RegisterGrpcService();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.RegisterSwaggerService();
+
+builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+
+builder.Services.RegisterInfrastructureServices();
+
+builder.Services.AddBasketDbContext(builder.Configuration);
+
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.SwaggerConfig();
+
 }
 
-app.UseAuthorization();
+app.MigrateDataBase<Program>((services) =>
+{
+    var context = services.GetService<BasketContext>();
+    if (context != null) new BasketContextSeed().MigrateAndSeed(context).Wait();
+});
+
+app.GrpcConfig();
 
 app.MapControllers();
 

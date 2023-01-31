@@ -1,6 +1,4 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.Domain.AggregatesModel.CatalogAggregate;
-
+﻿
 namespace Catalog.API.Application.Features.Catalog.Commands.UpdateStock;
 
 public class UpdateStockCommandHandler:IRequestHandler<UpdateStockCommand,int>

@@ -1,7 +1,4 @@
-﻿using Catalog.Domain.AggregatesModel.SupplierAggregate;
-using Catalog.Domain.SeedWork;
-
-namespace Catalog.Infrastructure.Repositories;
+﻿namespace Catalog.Infrastructure.Repositories;
 
 public class SupplierRepository : ISupplierRepository
 {

@@ -1,8 +1,4 @@
-﻿using Catalog.Domain.AggregatesModel.CatalogTypeAggregate;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace Catalog.Infrastructure.EntityConfigurations;
+﻿namespace Catalog.Infrastructure.EntityConfigurations;
 
 public class CatalogTypeEntityConfiguration: IEntityTypeConfiguration<CatalogType>
 {

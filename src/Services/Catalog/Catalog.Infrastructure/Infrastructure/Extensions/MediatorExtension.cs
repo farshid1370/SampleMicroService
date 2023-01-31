@@ -1,7 +1,4 @@
-﻿using Catalog.Domain.SeedWork;
-using MediatR;
-
-namespace Catalog.Infrastructure.Infrastructure.Extensions;
+﻿namespace Catalog.Infrastructure.Infrastructure.Extensions;
 
 public static class MediatorExtension
 {

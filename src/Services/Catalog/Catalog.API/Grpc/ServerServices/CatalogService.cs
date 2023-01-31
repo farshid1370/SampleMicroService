@@ -1,4 +1,4 @@
-﻿namespace Catalog.API.Grpc.Services;
+﻿namespace Catalog.API.Grpc.ServerServices;
 
 public class CatalogService : Proto.Catalog.CatalogBase
 {

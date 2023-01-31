@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
+﻿namespace Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
 
 public static class ConfigDatabaseExtension
 {

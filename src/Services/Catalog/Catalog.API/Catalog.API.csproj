@@ -37,7 +37,7 @@
 		<Folder Include="Application\Features\Catalog\Commands\UpdateStock\" />
 		<Folder Include="Application\Features\Catalog\Queries\GetCatalogList\" />
 		<Folder Include="Exceptions\" />
-		<Folder Include="Grpc\Services\" />
+		<Folder Include="Grpc\ServerServices\" />
 		<Folder Include="Infrastructure\ConfigurationExtensions\" />
 	</ItemGroup>
 

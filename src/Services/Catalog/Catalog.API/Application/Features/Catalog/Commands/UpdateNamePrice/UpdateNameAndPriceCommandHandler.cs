@@ -1,6 +1,4 @@
-﻿using Catalog.API.Exceptions;
-using Catalog.Domain.AggregatesModel.CatalogAggregate;
-
+﻿
 namespace Catalog.API.Application.Features.Catalog.Commands.UpdateNamePrice;
 
 public class UpdateNameAndPriceCommandHandler:IRequestHandler<UpdateNameAndPriceCommand>

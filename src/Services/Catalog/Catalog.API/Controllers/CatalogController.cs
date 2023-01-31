@@ -1,6 +1,4 @@
-﻿using Catalog.API.Application.Features.Catalog.Commands.UpdateStock;
-
-namespace Catalog.API.Controllers;
+﻿namespace Catalog.API.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]

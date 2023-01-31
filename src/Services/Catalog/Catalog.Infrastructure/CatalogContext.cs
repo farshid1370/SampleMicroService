@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Design;
-
-namespace Catalog.Infrastructure;
+﻿namespace Catalog.Infrastructure;
 
 public class CatalogContext:DbContext,IUnitOfWork
 {

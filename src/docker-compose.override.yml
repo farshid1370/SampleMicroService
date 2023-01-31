@@ -8,6 +8,7 @@ services:
     ports:
       - "26110:80"
       - "26111:81"
+
   catalogDB:
     environment:
       - POSTGRES_USER=admin
@@ -16,13 +17,28 @@ services:
     ports:
       - "26112:5432"
     volumes:
-      - postgresData:/var/lib/postgresql/data/
+      - catalogDbData:/var/lib/postgresql/data/
+
   basketAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionString=Server=basketDB;Database=basketDB;User Id=admin;Password=admin1234;
     ports:
       - "26120:80"
       - "26121:81"
+
+  basketDB:
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+    restart: always
+    ports:
+      - "26122:5432"
+    volumes:
+      - basketDbData:/var/lib/postgresql/data/
+
 volumes:
-  postgresData:
+  catalogDbData:
+    external: false
+  basketDbData:
     external: false

@@ -1,6 +1,4 @@
-﻿using Catalog.Domain.DomainEvents;
-
-namespace Catalog.Domain.AggregatesModel.CatalogAggregate;
+﻿namespace Catalog.Domain.AggregatesModel.CatalogAggregate;
 
 public class CatalogItem : Entity, IAggregateRoot
 {

@@ -1,6 +1,4 @@
-﻿using Catalog.Domain.AggregatesModel.CatalogAggregate;
-
-namespace Catalog.API.Application.Features.Catalog.Queries.GetCatalogList;
+﻿namespace Catalog.API.Application.Features.Catalog.Queries.GetCatalogList;
 
 public class GetCatalogListQueryHandler : IRequestHandler<GetCatalogListQuery, CatalogListVM>
 {
