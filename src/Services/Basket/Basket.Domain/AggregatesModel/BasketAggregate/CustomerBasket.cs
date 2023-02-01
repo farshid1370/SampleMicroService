@@ -17,9 +17,9 @@ public class CustomerBasket : Entity, IAggregateRoot
     public string BuyerId => _buyerId;
     public IReadOnlyCollection<BasketItem> Items => _items;
 
-    public void AddBasketItem(Guid id, int quantity, Guid productId, string productName, decimal unitPrice, decimal oldUnitPrice)
+    public void AddBasketItem( int quantity, Guid productId, string productName, decimal unitPrice, decimal oldUnitPrice)
     {
-        _items.Add(new BasketItem(id,_id, quantity, productId, productName, unitPrice, oldUnitPrice));
+        _items.Add(new BasketItem(_id, quantity, productId, productName, unitPrice, oldUnitPrice));
     }
    
 }

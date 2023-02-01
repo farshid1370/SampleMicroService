@@ -11,14 +11,14 @@ public class UpdateBasketCommandHandler:IRequestHandler<UpdateBasketCommand>
 
     public async Task<Unit> Handle(UpdateBasketCommand request, CancellationToken cancellationToken)
     {
-        var basket = new CustomerBasket(request.BuyerId);
+        var basket = await _repository.GetBasket(request.BuyerId);
         foreach (var item in request.BasketItems)
         {
-            basket.AddBasketItem(item.Id, item.Quantity, item.ProductId, item.ProductName, item.UnitPrice,
+            basket.AddBasketItem( item.Quantity, item.ProductId, item.ProductName, item.UnitPrice,
                 item.OldUnitPrice);
         }
 
-        _repository.UpdateBasket(basket);
+        _repository.AddBasketItems(basket.Items);
         await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         return Unit.Value;

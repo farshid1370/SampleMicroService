@@ -11,9 +11,9 @@ public class BasketItem : Entity
     private decimal _oldUnitPrice;
 
 
-    public BasketItem(Guid id,Guid customerBasketId, int quantity, Guid productId, string productName, decimal unitPrice, decimal oldUnitPrice)
+    public BasketItem(Guid customerBasketId, int quantity, Guid productId, string productName, decimal unitPrice, decimal oldUnitPrice)
     {
-        _id = id;
+        _id = new Guid();
         _customerBasketId = customerBasketId;
         _quantity = quantity < 1 ? throw new BasketDomainException("Invalid number of units Quantity") : quantity;
         _productId = productId;

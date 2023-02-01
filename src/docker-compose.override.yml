@@ -22,7 +22,7 @@ services:
   basketAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionString=Server=basketDB;Database=basketDB;User Id=admin;Password=admin1234;
+      - ConnectionString=Server=basketDB;Database=BasketDB;User Id=admin;Password=admin1234;
     ports:
       - "26120:80"
       - "26121:81"

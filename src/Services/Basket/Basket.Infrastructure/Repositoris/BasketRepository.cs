@@ -35,5 +35,8 @@ public class BasketRepository:IBasketRepository
         _context.Entry(customerBasket).State = EntityState.Modified;
     }
 
-    
+    public void AddBasketItems(IEnumerable<BasketItem> list)
+    {
+        _context.BasketItems.AddRange(list);
+    }
 }
