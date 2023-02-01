@@ -21,7 +21,7 @@ public class UpdateStockCommandHandler:IRequestHandler<UpdateStockCommand,int>
 
         var removed = catalogItem.RemoveStock(request.Quantity);
 
-        await _catalogRepository.UnitOfWork.SaveEntitiesAsync();
+        await _catalogRepository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
         return removed;
     }
 }

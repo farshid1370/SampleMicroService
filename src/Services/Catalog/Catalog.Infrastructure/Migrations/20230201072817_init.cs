@@ -1,4 +1,8 @@
-﻿#nullable disable
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
 namespace Catalog.Infrastructure.Migrations
 {
     /// <inheritdoc />
@@ -21,21 +25,6 @@ namespace Catalog.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CatalogType", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Supplier",
-                schema: "Catalog",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: false),
-                    AddressStreet = table.Column<string>(name: "Address_Street", type: "text", nullable: false),
-                    AddressCity = table.Column<string>(name: "Address_City", type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Supplier", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,25 +53,40 @@ namespace Catalog.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Supplier",
+                schema: "Catalog",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uuid", nullable: false),
+                    CatalogTypeId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: false),
+                    AddressStreet = table.Column<string>(name: "Address_Street", type: "text", nullable: false),
+                    AddressCity = table.Column<string>(name: "Address_City", type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplier", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Supplier_CatalogType_CatalogTypeId",
+                        column: x => x.CatalogTypeId,
+                        principalSchema: "Catalog",
+                        principalTable: "CatalogType",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SupplierItem",
                 schema: "Catalog",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     SupplierId = table.Column<Guid>(type: "uuid", nullable: false),
-                    RequestNumber = table.Column<int>(type: "integer", nullable: false),
-                    CatalogTypeId = table.Column<Guid>(type: "uuid", nullable: false)
+                    RequestNumber = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SupplierItem", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SupplierItem_CatalogType_CatalogTypeId",
-                        column: x => x.CatalogTypeId,
-                        principalSchema: "Catalog",
-                        principalTable: "CatalogType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_SupplierItem_Supplier_SupplierId",
                         column: x => x.SupplierId,
@@ -99,9 +103,9 @@ namespace Catalog.Infrastructure.Migrations
                 column: "CatalogTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SupplierItem_CatalogTypeId",
+                name: "IX_Supplier_CatalogTypeId",
                 schema: "Catalog",
-                table: "SupplierItem",
+                table: "Supplier",
                 column: "CatalogTypeId");
 
             migrationBuilder.CreateIndex(
@@ -123,11 +127,11 @@ namespace Catalog.Infrastructure.Migrations
                 schema: "Catalog");
 
             migrationBuilder.DropTable(
-                name: "CatalogType",
+                name: "Supplier",
                 schema: "Catalog");
 
             migrationBuilder.DropTable(
-                name: "Supplier",
+                name: "CatalogType",
                 schema: "Catalog");
         }
     }

@@ -7,6 +7,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -21,12 +22,19 @@
 	  <PackageReference Include="Google.Protobuf" Version="3.21.12" />
 	  <PackageReference Include="Grpc.AspNetCore.Server" Version="2.51.0" />
 	  <PackageReference Include="Grpc.Tools" Version="2.51.0" PrivateAssets="All" />
+	  <PackageReference Include="MassTransit" Version="8.0.6" />
+	  <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Host\Host\Common.Host.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\Integration\Common.Integration\Common.Integration.csproj" />
     <ProjectReference Include="..\Basket.Domain\Basket.Domain.csproj" />
     <ProjectReference Include="..\Basket.Infrastructure\Basket.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Application\Integration\EventHandler\" />
   </ItemGroup>
 
 </Project>

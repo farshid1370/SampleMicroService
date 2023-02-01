@@ -54,7 +54,7 @@ public class CatalogItem : Entity, IAggregateRoot
         _price = newPrice;
     }
 
-    public int AddStok(int quantity)
+    public int AddStock(int quantity)
     {
         var original = _availableStock;
         if (original + quantity > _maxStockThreshold)

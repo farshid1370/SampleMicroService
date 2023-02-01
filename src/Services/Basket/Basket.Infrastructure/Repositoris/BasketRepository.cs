@@ -15,6 +15,10 @@ public class BasketRepository:IBasketRepository
     public async Task<CustomerBasket> GetBasket(string buyerId)
     {
         var basket = await _context.CustomerBaskets.FirstOrDefaultAsync(b => b.BuyerId == buyerId);
+        if (basket != null)
+        {
+           await _context.Entry(basket).Collection(b => b.Items).LoadAsync();
+        }
         return basket;
     }
     public async Task<IEnumerable<BasketItem>> GetBasketItems(Guid basketId)
@@ -32,6 +36,10 @@ public class BasketRepository:IBasketRepository
 
     public  void UpdateBasket(CustomerBasket customerBasket)
     {
+        foreach (var customerBasketItem in customerBasket.Items)
+        {
+            _context.Entry(customerBasketItem).State = EntityState.Modified;
+        }
         _context.Entry(customerBasket).State = EntityState.Modified;
     }
 

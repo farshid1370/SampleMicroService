@@ -22,14 +22,18 @@ public class SupplierRepository : ISupplierRepository
 
     public async Task<IEnumerable<Supplier>> GetByType(Guid typeId)
     {
-        var suppliers = await _context.Suppliers.Where(s => s.SupplierItems.Any(si => si.CatalogTypeId == typeId))
+        var suppliers = await _context.Suppliers.Where(s => s.CatalogTypeId==typeId)
             .ToListAsync();
         return suppliers;
     }
 
-    public Task<Supplier> GetById(Guid id)
+    public async Task<Supplier> GetById(Guid id)
     {
-        var item = _context.Suppliers.FirstOrDefaultAsync(s => s.Id == id);
+        var item = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == id);
+        if (item != null)
+        {
+            await _context.Entry(item).Collection(s => s.SupplierItems).LoadAsync();
+        }
         return item;
     }
 }

@@ -18,6 +18,8 @@ builder.Services.RegisterInfrastructureServices();
 
 builder.Services.AddCatalogDbContext(builder.Configuration);
 
+builder.Services.RegisterMasstransitService();
+
 
 var app = builder.Build();
 

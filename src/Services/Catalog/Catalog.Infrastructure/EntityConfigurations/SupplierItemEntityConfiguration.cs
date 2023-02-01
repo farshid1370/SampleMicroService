@@ -8,9 +8,7 @@ public class SupplierItemEntityConfiguration:IEntityTypeConfiguration<SupplierIt
         builder.HasKey(s => s.Id);
         builder.Ignore(s => s.DomainEvents);
         builder.Property(s => s.RequestNumber).HasField("_requestNumber").HasColumnName("RequestNumber").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
-        builder.Property(s => s.CatalogTypeId).HasField("_catalogTypeId").HasColumnName("CatalogTypeId").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.Property(s => s.SupplierId).HasField("_supplierId").HasColumnName("SupplierId").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.HasOne<Supplier>().WithMany(s => s.SupplierItems).HasForeignKey(s=>s.SupplierId);
-        builder.HasOne<CatalogType>().WithMany().HasForeignKey(s=>s.CatalogTypeId);
     }
 }

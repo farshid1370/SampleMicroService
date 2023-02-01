@@ -17,6 +17,7 @@ builder.Services.RegisterInfrastructureServices();
 
 builder.Services.AddBasketDbContext(builder.Configuration);
 
+builder.Services.RegisterMasstransitService();
 
 var app = builder.Build();
 

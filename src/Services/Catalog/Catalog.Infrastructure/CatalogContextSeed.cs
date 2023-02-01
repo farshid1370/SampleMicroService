@@ -81,8 +81,8 @@ public class CatalogContextSeed
     {
         return new List<Supplier>
         {
-            new (id:new Guid(),name:"supplier1",new Address("2583 Derek Drive","Akron")),
-            new (id:new Guid(),name:"supplier2",new Address("771 Oak Street","Syracuse")),
+            new (id:new Guid(),catalogTypeId:_catalogTypeIds[2],name:"supplier1",new Address("2583 Derek Drive","Akron")),
+            new (id:new Guid(),catalogTypeId:_catalogTypeIds[2],name:"supplier2",new Address("771 Oak Street","Syracuse")),
         };
     }
 

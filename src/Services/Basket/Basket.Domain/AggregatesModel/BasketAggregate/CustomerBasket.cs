@@ -6,12 +6,14 @@ public class CustomerBasket : Entity, IAggregateRoot
     private string _buyerId;
     private readonly List<BasketItem> _items;
 
-    public CustomerBasket(string buyerId)
+    protected CustomerBasket()
     {
-
         _id = new Guid();
-        _buyerId = buyerId;
         _items = new List<BasketItem>();
+    }
+    public CustomerBasket(string buyerId):this()
+    {
+        _buyerId = buyerId;
     }
     public Guid Id=> _id;
     public string BuyerId => _buyerId;

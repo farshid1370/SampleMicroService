@@ -1,14 +1,24 @@
-﻿namespace Catalog.Domain.DomainEvents;
+﻿using MassTransit;
+
+namespace Catalog.Domain.DomainEvents;
 
 public class CatalogPriceChangedDomainEventHandler:INotificationHandler<CatalogPriceChangedDomainEvent>
 {
-    public Task Handle(CatalogPriceChangedDomainEvent notification, CancellationToken cancellationToken)
+    private readonly IPublishEndpoint _publishEndpoint;
+
+    public CatalogPriceChangedDomainEventHandler(IPublishEndpoint publishEndpoint)
+    {
+        _publishEndpoint = publishEndpoint;
+    }
+
+    public async Task Handle(CatalogPriceChangedDomainEvent notification, CancellationToken cancellationToken)
     {
         var oldPrice = notification.OldPrice;
         var newPrice = notification.NewPrice;
         var catalogId = notification.CatalogItem.Id;
-        //TODO:Implement Integration Event
-        // await _catalogIntegrationEventService.AddAndSaveEventAsync(new CatalogPriceChangedIntegrationEvent(catalogId, newPrice, oldPrice));
-        return Task.CompletedTask;
+        await _publishEndpoint.Publish<CatalogPriceChangedIntegrationEvent>(
+            new CatalogPriceChangedIntegrationEvent(catalogId, newPrice, oldPrice), cancellationToken);
+       
+        
     }
 }

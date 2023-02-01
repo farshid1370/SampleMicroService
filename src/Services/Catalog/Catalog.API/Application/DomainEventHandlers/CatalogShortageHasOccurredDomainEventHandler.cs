@@ -14,7 +14,7 @@ public class CatalogShortageHasOccurredDomainEventHandler:INotificationHandler<C
         var suppliersList = await _supplierRepository.GetByType(notification.CatalogItem.CatalogTypeId);
         foreach (var supplier in suppliersList)
         {
-            supplier.AddSupplierItem(supplier.Id, notification.CatalogItem.Id, notification.RequiredInventory);
+            supplier.AddSupplierItem(supplier.Id, notification.RequiredInventory);
 
             _supplierRepository.Update(supplier);
         }

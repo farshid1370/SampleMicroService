@@ -27,3 +27,6 @@ services:
   basketDB:
     image: postgres
     container_name: basketDB
+
+  rabbitmq:
+    image: masstransit/rabbitmq

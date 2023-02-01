@@ -37,6 +37,11 @@ services:
     volumes:
       - basketDbData:/var/lib/postgresql/data/
 
+  rabbitmq:
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
 volumes:
   catalogDbData:
     external: false

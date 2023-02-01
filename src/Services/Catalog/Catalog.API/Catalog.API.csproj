@@ -22,12 +22,15 @@
 		<PackageReference Include="Google.Protobuf" Version="3.21.12" />
 		<PackageReference Include="Grpc.AspNetCore.Server" Version="2.51.0" />
 		<PackageReference Include="Grpc.Tools" Version="2.51.0" PrivateAssets="All" />
+		<PackageReference Include="MassTransit" Version="8.0.6" />
+		<PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
 	</ItemGroup>
 	<ItemGroup>
 		<Protobuf Include="Grpc\Proto\catalog.proto" GrpcServices="Server" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\BuildingBlocks\Host\Host\Common.Host.csproj" />
+		<ProjectReference Include="..\..\..\BuildingBlocks\Integration\Common.Integration\Common.Integration.csproj" />
 		<ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
 		<ProjectReference Include="..\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />
 	</ItemGroup>
@@ -36,6 +39,7 @@
 		<Folder Include="Application\Features\Catalog\Commands\CreateCatalog\" />
 		<Folder Include="Application\Features\Catalog\Commands\UpdateStock\" />
 		<Folder Include="Application\Features\Catalog\Queries\GetCatalogList\" />
+		<Folder Include="Application\Features\Catalog\Queries\GetSupplier\" />
 		<Folder Include="Exceptions\" />
 		<Folder Include="Grpc\ServerServices\" />
 		<Folder Include="Infrastructure\ConfigurationExtensions\" />

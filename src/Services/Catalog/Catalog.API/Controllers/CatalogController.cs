@@ -68,6 +68,7 @@ public class CatalogController : ControllerBase
         return CreatedAtAction(nameof(GetCatalog), new { id = command.Id }, null);
 
     }
+   
 
 }
 
