@@ -18,7 +18,7 @@ public static class ConfigSwaggerExtension
             );
         return services;
     }
-    public static IApplicationBuilder SwaggerConfig(this IApplicationBuilder app)
+    public static IApplicationBuilder SwaggerConfig(this WebApplication app)
     {
         app.UseSwagger();
         app.UseSwaggerUI();
