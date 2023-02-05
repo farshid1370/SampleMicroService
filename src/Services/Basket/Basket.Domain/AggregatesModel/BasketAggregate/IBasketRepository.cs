@@ -9,6 +9,6 @@ public interface IBasketRepository : IRepository<CustomerBasket>
     Task<IEnumerable<BasketItem>> GetBasketItems(Guid basketId);
     Task<IEnumerable<string>> GetUsers();
     void UpdateBasket(CustomerBasket customerBasket);
-    void AddBasketItems(IEnumerable<BasketItem> list);
+ 
 
 }

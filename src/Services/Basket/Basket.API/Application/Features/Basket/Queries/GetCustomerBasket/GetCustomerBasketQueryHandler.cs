@@ -12,12 +12,12 @@ public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQu
     public async Task<CustomerBasketVM> Handle(GetCustomerBasketQuery request, CancellationToken cancellationToken)
     {
         var basket = await _repository.GetBasket(request.CustomerId);
-        var basketItems = await _repository.GetBasketItems(basket.Id);
+       
         if (basket == null) return null;
       
         var customerBasketVM = new CustomerBasketVM
         {
-            BasketItems = basketItems.Select(p => new BasketItemVM
+            BasketItems = basket.BasketItems.Select(p => new BasketItemVM
             {
                 Id = p.Id,
                 OldUnitPrice = p.OldUnitPrice,

@@ -9,8 +9,8 @@ global using Microsoft.AspNetCore.Server.Kestrel.Core;
 global using Basket.API.Infrastructure.ConfigurationExtensions;
 global using Basket.Infrastructure;
 global using Basket.Infrastructure.Infrastructure.ConfigurationExtensions;
-global using Common.Host;
 global using Common.Integration;
 global using Common.Integration.Events;
 global using MassTransit;
+global using Catalog.API.Grpc.Proto;
  

@@ -29,11 +29,7 @@ if (app.Environment.IsDevelopment())
 
 }
 
-app.MigrateDataBase<Program>((services) =>
-{
-    var context = services.GetService<CatalogContext>();
-    if (context != null) new CatalogContextSeed().MigrateAndSeed(context).Wait();
-});
+app.CatalogMigrateAndSeed().Wait();
 
 app.GrpcConfig();
 

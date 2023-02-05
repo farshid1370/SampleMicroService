@@ -29,7 +29,6 @@
 		<Protobuf Include="Grpc\Proto\catalog.proto" GrpcServices="Server" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\BuildingBlocks\Host\Host\Common.Host.csproj" />
 		<ProjectReference Include="..\..\..\BuildingBlocks\Integration\Common.Integration\Common.Integration.csproj" />
 		<ProjectReference Include="..\Catalog.Domain\Catalog.Domain.csproj" />
 		<ProjectReference Include="..\Catalog.Infrastructure\Catalog.Infrastructure.csproj" />

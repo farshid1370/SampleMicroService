@@ -17,7 +17,6 @@ global using Catalog.API.Exceptions;
 global using Catalog.API.Infrastructure.ConfigurationExtensions;
 global using Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
 global using Catalog.Infrastructure;
-global using Common.Host;
 global using Common.Integration;
 global using Common.Integration.Events;
 global using MassTransit;

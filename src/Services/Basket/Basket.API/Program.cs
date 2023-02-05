@@ -1,4 +1,7 @@
 
+using System;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.ConfigKestrel();
@@ -27,11 +30,7 @@ if (app.Environment.IsDevelopment())
 
 }
 
-app.MigrateDataBase<Program>((services) =>
-{
-    var context = services.GetService<BasketContext>();
-    if (context != null) new BasketContextSeed().MigrateAndSeed(context).Wait();
-});
+app.BasketMigrateAndSeed().Wait();
 
 app.GrpcConfig();
 

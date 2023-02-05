@@ -1,22 +1,25 @@
-﻿namespace Catalog.Infrastructure;
+﻿using Microsoft.Extensions.Hosting;
 
-public class CatalogContextSeed
+namespace Catalog.Infrastructure;
+
+public static class CatalogContextSeedExtension
 {
-    private readonly Dictionary<int, Guid> _catalogTypeIds;
-
-    public CatalogContextSeed()
+    private static readonly Dictionary<int, Guid> _catalogTypeIds = new Dictionary<int, Guid>
     {
-        _catalogTypeIds = new Dictionary<int, Guid>
-        {
-            {1, Guid.NewGuid()},
-            {2, Guid.NewGuid()},
-            {3, Guid.NewGuid()},
-            {4, Guid.NewGuid()}
-        };
-    }
+        {1, Guid.NewGuid()},
+        {2, Guid.NewGuid()},
+        {3, Guid.NewGuid()},
+        {4, Guid.NewGuid()}
+    };
 
-    public async Task MigrateAndSeed(CatalogContext context)
+
+
+    public static async Task CatalogMigrateAndSeed(this IHost app)
     {
+
+        using var scope = app.Services.CreateScope();
+        var context = scope.ServiceProvider
+            .GetRequiredService<CatalogContext>();
 
         await context.Database.MigrateAsync();
 
@@ -42,7 +45,7 @@ public class CatalogContextSeed
             await context.SaveChangesAsync();
         }
     }
-    private IEnumerable<CatalogType> SeedCatalogTypes()
+    private static IEnumerable<CatalogType> SeedCatalogTypes()
     {
         return new List<CatalogType>
         {
@@ -52,7 +55,7 @@ public class CatalogContextSeed
             new ( _catalogTypeIds[4],"USB Memory Stick")
         };
     }
-    private IEnumerable<CatalogItem> SeedCatalogItems()
+    private static IEnumerable<CatalogItem> SeedCatalogItems()
     {
         return new List<CatalogItem>
         {
@@ -77,7 +80,7 @@ public class CatalogContextSeed
 
         };
     }
-    private IEnumerable<Supplier> SeedSupplier()
+    private static IEnumerable<Supplier> SeedSupplier()
     {
         return new List<Supplier>
         {

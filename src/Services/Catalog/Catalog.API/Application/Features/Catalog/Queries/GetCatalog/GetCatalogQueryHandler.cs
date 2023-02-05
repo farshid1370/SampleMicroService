@@ -12,7 +12,6 @@ public class GetCatalogQueryHandler : IRequestHandler<GetCatalogQuery, CatalogVM
     public async Task<CatalogVM> Handle(GetCatalogQuery request, CancellationToken cancellationToken)
     {
         var item = await _catalogRepository.GetById(request.CatalogId);
-
         if (item != null)
             // mapping ... u can use auto mapper or mapster
             return new CatalogVM

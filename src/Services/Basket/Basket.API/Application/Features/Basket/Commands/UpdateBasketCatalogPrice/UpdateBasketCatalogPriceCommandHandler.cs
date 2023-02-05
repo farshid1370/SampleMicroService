@@ -15,12 +15,8 @@ public class UpdateBasketCatalogPriceCommandHandler : IRequestHandler<UpdateBask
         foreach (var id in userIds)
         {
             var basket = await _repository.GetBasket(id);
-            var basketItems = await _repository.GetBasketItems(basket.Id);
-            foreach (var basketItem in basketItems)
-            {
-                basket.AddBasketItem(basketItem.Quantity,basketItem.ProductId,basketItem.ProductName,basketItem.UnitPrice,basketItem.OldUnitPrice);
-            }
 
+            _repository.UpdateBasket(basket);
             UpdatePriceInBasketItems(request.CatalogId, request.NewPrice, request.OldPrice, basket);
         }
 
@@ -32,9 +28,9 @@ public class UpdateBasketCatalogPriceCommandHandler : IRequestHandler<UpdateBask
     {
         var itemsToUpdate = basket?.BasketItems?.Where(x => x.ProductId == productId).ToList();
 
-        if (itemsToUpdate == null || itemsToUpdate.Count==0) return;
+        if (itemsToUpdate == null || itemsToUpdate.Count == 0) return;
 
-        foreach (var item in itemsToUpdate.Where(item => item.UnitPrice != oldPrice))
+        foreach (var item in itemsToUpdate.Where(item => item.UnitPrice != newPrice))
         {
             item.SetNewPrice(newPrice);
         }

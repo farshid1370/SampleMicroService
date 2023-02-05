@@ -34,17 +34,11 @@ public class BasketRepository:IBasketRepository
         return users;
     }
 
-    public  void UpdateBasket(CustomerBasket customerBasket)
+    public void UpdateBasket(CustomerBasket customerBasket)
     {
-        foreach (var customerBasketItem in customerBasket.BasketItems)
-        {
-            _context.Entry(customerBasketItem).State = EntityState.Modified;
-        }
+      
         _context.Entry(customerBasket).State = EntityState.Modified;
     }
 
-    public void AddBasketItems(IEnumerable<BasketItem> list)
-    {
-        _context.BasketItems.AddRange(list);
-    }
+   
 }

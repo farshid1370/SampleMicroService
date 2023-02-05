@@ -1,4 +1,7 @@
-﻿namespace Catalog.API.Grpc.ServerServices;
+﻿using Catalog.API.Grpc.Proto;
+using Grpc.Core;
+
+namespace Catalog.API.Grpc.ServerServices;
 
 public class CatalogService : Proto.Catalog.CatalogBase
 {
@@ -9,5 +12,9 @@ public class CatalogService : Proto.Catalog.CatalogBase
         _mediator = mediator;
     }
 
-   
+    public override async Task<CatalogPriceResponse> GetCatalogPrice(CatalogPriceRequest request, ServerCallContext context)
+    {
+        var catalog= await _mediator.Send(new GetCatalogQuery {CatalogId = new Guid(request.CatalogId)});
+        return new CatalogPriceResponse {Price = catalog.Price};
+    }
 }
