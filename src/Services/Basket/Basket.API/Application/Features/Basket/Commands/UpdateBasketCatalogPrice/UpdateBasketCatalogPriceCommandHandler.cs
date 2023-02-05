@@ -30,7 +30,7 @@ public class UpdateBasketCatalogPriceCommandHandler : IRequestHandler<UpdateBask
     }
     private void UpdatePriceInBasketItems(Guid productId, decimal newPrice, decimal oldPrice, CustomerBasket basket)
     {
-        var itemsToUpdate = basket?.Items?.Where(x => x.ProductId == productId).ToList();
+        var itemsToUpdate = basket?.BasketItems?.Where(x => x.ProductId == productId).ToList();
 
         if (itemsToUpdate == null || itemsToUpdate.Count==0) return;
 

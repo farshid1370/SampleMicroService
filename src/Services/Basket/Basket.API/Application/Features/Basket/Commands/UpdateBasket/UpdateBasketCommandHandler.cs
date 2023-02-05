@@ -18,7 +18,7 @@ public class UpdateBasketCommandHandler:IRequestHandler<UpdateBasketCommand>
                 item.OldUnitPrice);
         }
 
-        _repository.AddBasketItems(basket.Items);
+        _repository.AddBasketItems(basket.BasketItems);
         await _repository.UnitOfWork.SaveEntitiesAsync(cancellationToken);
 
         return Unit.Value;

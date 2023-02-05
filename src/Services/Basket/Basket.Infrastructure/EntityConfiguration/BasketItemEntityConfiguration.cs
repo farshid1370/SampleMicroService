@@ -13,6 +13,6 @@ public class BasketItemEntityConfiguration:IEntityTypeConfiguration<BasketItem>
         builder.Property(b => b.Quantity).HasField("_quantity").HasColumnName("Quantity").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.Property(b => b.UnitPrice).HasField("_unitPrice").HasColumnName("UnitPrice").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
         builder.Property(b => b.OldUnitPrice).HasField("_oldUnitPrice").HasColumnName("OldUnitPrice").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
-        builder.HasOne<CustomerBasket>().WithMany().HasForeignKey(b => b.CustomerBasketId);
+        builder.HasOne<CustomerBasket>().WithMany(b=>b.BasketItems).HasForeignKey(b => b.CustomerBasketId);
     }
 }

@@ -79,10 +79,15 @@ namespace Basket.Infrastructure.Migrations
             modelBuilder.Entity("Basket.Domain.AggregatesModel.BasketAggregate.BasketItem", b =>
                 {
                     b.HasOne("Basket.Domain.AggregatesModel.BasketAggregate.CustomerBasket", null)
-                        .WithMany()
+                        .WithMany("BasketItems")
                         .HasForeignKey("CustomerBasketId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Basket.Domain.AggregatesModel.BasketAggregate.CustomerBasket", b =>
+                {
+                    b.Navigation("BasketItems");
                 });
 #pragma warning restore 612, 618
         }

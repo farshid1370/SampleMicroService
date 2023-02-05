@@ -17,7 +17,7 @@ public class BasketRepository:IBasketRepository
         var basket = await _context.CustomerBaskets.FirstOrDefaultAsync(b => b.BuyerId == buyerId);
         if (basket != null)
         {
-           await _context.Entry(basket).Collection(b => b.Items).LoadAsync();
+           await _context.Entry(basket).Collection(b => b.BasketItems).LoadAsync();
         }
         return basket;
     }
@@ -36,7 +36,7 @@ public class BasketRepository:IBasketRepository
 
     public  void UpdateBasket(CustomerBasket customerBasket)
     {
-        foreach (var customerBasketItem in customerBasket.Items)
+        foreach (var customerBasketItem in customerBasket.BasketItems)
         {
             _context.Entry(customerBasketItem).State = EntityState.Modified;
         }

@@ -7,9 +7,8 @@ public class CustomerBasketEntityConfiguration : IEntityTypeConfiguration<Custom
         builder.ToTable("CustomerBasket", schema: "Basket");
         builder.HasKey(b => b.Id);
         builder.Ignore(b => b.DomainEvents);
-        builder.Ignore(b => b.Items);
-        var basketItemsNavigation = builder.Metadata.FindNavigation(nameof(CustomerBasket.Items));
-        basketItemsNavigation?.SetPropertyAccessMode(PropertyAccessMode.Field);
+        var basketItemsNavigation = builder.Metadata.FindNavigation(nameof(CustomerBasket.BasketItems));
+        basketItemsNavigation?.SetPropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
         builder.Property(b=>b.BuyerId).HasField("_buyerId").HasColumnName("BuyerId").UsePropertyAccessMode(PropertyAccessMode.Field).IsRequired();
     }
 }
