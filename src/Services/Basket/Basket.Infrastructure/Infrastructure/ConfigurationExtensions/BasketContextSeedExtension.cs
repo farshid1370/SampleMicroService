@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace Basket.Infrastructure.Infrastructure.ConfigurationExtensions;
+﻿namespace Basket.Infrastructure.Infrastructure.ConfigurationExtensions;
 
 public static class BasketContextSeedExtension
 {

@@ -1,5 +1,4 @@
-﻿
-namespace Catalog.Infrastructure.Repositories;
+﻿namespace Catalog.Infrastructure.Repositories;
 
 public class CatalogRepository : ICatalogRepository
 {

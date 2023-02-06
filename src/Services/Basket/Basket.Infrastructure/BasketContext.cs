@@ -1,9 +1,4 @@
-﻿using Basket.Domain.SeedWork;
-using Basket.Infrastructure.EntityConfiguration;
-using Basket.Infrastructure.Infrastructure.Extensions;
-using MediatR;
-
-namespace Basket.Infrastructure;
+﻿namespace Basket.Infrastructure;
 
 public class BasketContext:DbContext,IUnitOfWork
 {

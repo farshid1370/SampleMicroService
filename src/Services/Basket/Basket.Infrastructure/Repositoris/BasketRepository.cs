@@ -1,6 +1,4 @@
-﻿using Basket.Domain.SeedWork;
-
-namespace Basket.Infrastructure.Repositoris;
+﻿namespace Basket.Infrastructure.Repositoris;
 
 public class BasketRepository:IBasketRepository
 {

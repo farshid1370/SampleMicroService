@@ -1,7 +1,4 @@
-﻿using Catalog.API.Grpc.Proto;
-using Grpc.Core;
-
-namespace Catalog.API.Grpc.ServerServices;
+﻿namespace Catalog.API.Grpc.ServerServices;
 
 public class CatalogService : Proto.Catalog.CatalogBase
 {

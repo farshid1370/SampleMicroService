@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace Basket.Domain.AggregatesModel.BasketAggregate;
+﻿namespace Basket.Domain.AggregatesModel.BasketAggregate;
 
 public interface IBasketRepository : IRepository<CustomerBasket>
 {

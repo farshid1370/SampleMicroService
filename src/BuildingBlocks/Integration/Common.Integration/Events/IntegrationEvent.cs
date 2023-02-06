@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Common.Integration.Events;
+﻿namespace Common.Integration.Events;
 
 public record IntegrationEvent : IntegrationMessage
 {

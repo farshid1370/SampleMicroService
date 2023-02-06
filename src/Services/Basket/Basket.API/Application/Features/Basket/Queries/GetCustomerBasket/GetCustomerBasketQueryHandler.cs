@@ -3,10 +3,11 @@
 public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQuery, CustomerBasketVM>
 {
     private readonly IBasketRepository _repository;
-
-    public GetCustomerBasketQueryHandler(IBasketRepository repository)
+    private readonly ICatalogService _catalogService;
+    public GetCustomerBasketQueryHandler(IBasketRepository repository, ICatalogService catalogService)
     {
         _repository = repository;
+        _catalogService = catalogService;
     }
 
     public async Task<CustomerBasketVM> Handle(GetCustomerBasketQuery request, CancellationToken cancellationToken)
@@ -24,10 +25,15 @@ public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQu
                 ProductId = p.ProductId,
                 ProductName = p.ProductName,
                 Quantity = p.Quantity,
-                UnitPrice = p.UnitPrice
+                UnitPrice = p.UnitPrice,
             }).ToList(),
             BuyerId = basket.BuyerId
         };
+
+        foreach (var item in customerBasketVM.BasketItems)
+        {
+            item.UnitPrice = (decimal) await _catalogService.GetCatalogPrice(item.ProductId);
+        }
 
         return customerBasketVM;
 

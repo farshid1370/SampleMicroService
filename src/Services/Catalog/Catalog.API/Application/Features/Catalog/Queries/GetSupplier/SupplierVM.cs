@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-
+﻿
 namespace Catalog.API.Application.Features.Catalog.Queries.GetSupplier;
 
 public class SupplierVM

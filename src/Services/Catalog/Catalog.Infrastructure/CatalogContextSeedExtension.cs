@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace Catalog.Infrastructure;
+﻿namespace Catalog.Infrastructure;
 
 public static class CatalogContextSeedExtension
 {

@@ -1,26 +1,17 @@
-﻿using Basket.API.Grpc.ClientServices;
-
-namespace Basket.API.Infrastructure.ConfigurationExtensions;
+﻿namespace Basket.API.Infrastructure.ConfigurationExtensions;
 
 public static class ConfigGrpcExtension
 {
-    public static IServiceCollection RegisterGrpcService(this IServiceCollection services)
+    public static IServiceCollection RegisterGrpcService(this IServiceCollection services,IConfiguration configuration)
     {
         services.AddScoped<ICatalogService, CatalogService>();
        
 
         services.AddGrpcClient<Catalog.API.Grpc.Proto.Catalog.CatalogClient>((services, options) =>
         {
-            options.Address = new Uri("");
+            options.Address = new Uri(configuration["CatalogGrpcUrl"]);
         });
         return services;
     }
-    public static IEndpointRouteBuilder GrpcConfig(this IEndpointRouteBuilder app)
-    {
-
-      
-      
-        return app;
-
-    }
+    
 }

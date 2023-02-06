@@ -1,6 +1,4 @@
-﻿using System.Text.Json.Serialization;
-
-namespace Common.Integration;
+﻿namespace Common.Integration;
 
 public record IntegrationMessage : IIntegrationMessage
 {

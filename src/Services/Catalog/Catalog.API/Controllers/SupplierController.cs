@@ -1,30 +1,27 @@
-﻿using Catalog.API.Application.Features.Catalog.Queries.GetSupplier;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿
 
-namespace Catalog.API.Controllers
+namespace Catalog.API.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class SupplierController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SupplierController : ControllerBase
+    private readonly IMediator _mediator;
+
+    public SupplierController(IMediator mediator)
     {
-        private readonly IMediator _mediator;
+        _mediator = mediator;
+    }
 
-        public SupplierController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
-        /// <summary>
-        /// Get supplier by id
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetSupplier(Guid id)
-        {
-            var supplier = await _mediator.Send(new GetSupplierQuery() { SupplierId = id });
-            return Ok(supplier);
-        }
+    /// <summary>
+    /// Get supplier by id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetSupplier(Guid id)
+    {
+        var supplier = await _mediator.Send(new GetSupplierQuery() { SupplierId = id });
+        return Ok(supplier);
     }
 }

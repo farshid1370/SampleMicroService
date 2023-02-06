@@ -1,12 +1,8 @@
-
-using System;
-using Microsoft.EntityFrameworkCore;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.ConfigKestrel();
 
-builder.Services.RegisterGrpcService();
+builder.Services.RegisterGrpcService(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -32,7 +28,6 @@ if (app.Environment.IsDevelopment())
 
 app.BasketMigrateAndSeed().Wait();
 
-app.GrpcConfig();
 
 app.MapControllers();
 

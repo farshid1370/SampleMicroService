@@ -1,7 +1,4 @@
-﻿using Basket.API.Application.Features.Basket.Commands.UpdateBasketCatalogPrice;
-using MassTransit;
-
-namespace Basket.API.Application.Integration.EventHandler;
+﻿namespace Basket.API.Application.Integration.EventHandler;
 
 public class CatalogPriceChangedIntegrationEventHandler:IConsumer<CatalogPriceChangedIntegrationEvent>
 {

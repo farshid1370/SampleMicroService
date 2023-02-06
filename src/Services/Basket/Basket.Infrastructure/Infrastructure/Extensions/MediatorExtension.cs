@@ -1,7 +1,4 @@
-﻿using Basket.Domain.SeedWork;
-using MediatR;
-
-namespace Basket.Infrastructure.Infrastructure.Extensions;
+﻿namespace Basket.Infrastructure.Infrastructure.Extensions;
 
 public static class MediatorExtension
 {

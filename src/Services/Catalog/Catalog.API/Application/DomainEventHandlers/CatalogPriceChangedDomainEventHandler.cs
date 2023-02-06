@@ -1,4 +1,4 @@
-﻿using MassTransit;
+﻿
 
 namespace Catalog.Domain.DomainEvents;
 
@@ -16,8 +16,8 @@ public class CatalogPriceChangedDomainEventHandler:INotificationHandler<CatalogP
         var oldPrice = notification.OldPrice;
         var newPrice = notification.NewPrice;
         var catalogId = notification.CatalogItem.Id;
-        await _publishEndpoint.Publish<CatalogPriceChangedIntegrationEvent>(
-            new CatalogPriceChangedIntegrationEvent(catalogId, newPrice, oldPrice), cancellationToken);
+        //await _publishEndpoint.Publish<CatalogPriceChangedIntegrationEvent>(
+        //    new CatalogPriceChangedIntegrationEvent(catalogId, newPrice, oldPrice), cancellationToken);
        
         
     }
