@@ -5,6 +5,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionString=Server=catalogDB;Database=CatalogDB;User Id=admin;Password=admin1234;
+      - CheckUpdateTimeForEventPublinshWorker=5000
     ports:
       - "26110:80"
       - "26111:81"

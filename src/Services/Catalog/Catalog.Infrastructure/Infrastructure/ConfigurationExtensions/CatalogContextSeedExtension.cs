@@ -1,4 +1,4 @@
-﻿namespace Catalog.Infrastructure;
+﻿namespace Catalog.Infrastructure.Infrastructure.ConfigurationExtensions;
 
 public static class CatalogContextSeedExtension
 {

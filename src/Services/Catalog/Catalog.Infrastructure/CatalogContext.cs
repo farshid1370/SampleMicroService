@@ -13,7 +13,6 @@ public class CatalogContext:DbContext,IUnitOfWork
     public DbSet<CatalogType> CatalogTypes { get; set; }
 
     public DbSet<Supplier> Suppliers { get; set; }
-
     public async Task<bool> SaveEntitiesAsync(CancellationToken cancellationToken = default(CancellationToken))
     {
         await _mediator.DispatchDomainEventsAsync(this);
@@ -28,14 +27,59 @@ public class CatalogContext:DbContext,IUnitOfWork
         builder.ApplyConfiguration(new SupplierItemEntityConfiguration());
 
     }
-    public class CatalogContextDesignFactory : IDesignTimeDbContextFactory<CatalogContext>
-    {
-        public CatalogContext CreateDbContext(string[] args)
-        {
-            var optionsBuilder = new DbContextOptionsBuilder<CatalogContext>()
-                .UseNpgsql("");
+   
+    private IDbContextTransaction _currentTransaction;
+    public bool HasActiveTransaction => _currentTransaction != null;
 
-            return new CatalogContext(optionsBuilder.Options,null);
+    public IDbContextTransaction GetCurrentTransaction() => _currentTransaction;
+    public async Task<IDbContextTransaction> BeginTransactionAsync()
+    {
+        if (_currentTransaction != null) return null;
+
+        _currentTransaction = await Database.BeginTransactionAsync(IsolationLevel.ReadCommitted);
+
+        return _currentTransaction;
+    }
+
+    public async Task CommitTransactionAsync(IDbContextTransaction transaction)
+    {
+        if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+        if (transaction != _currentTransaction) throw new InvalidOperationException($"Transaction {transaction.TransactionId} is not current");
+
+        try
+        {
+            await SaveChangesAsync();
+            transaction.Commit();
+        }
+        catch
+        {
+            RollbackTransaction();
+            throw;
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
         }
     }
+
+    public void RollbackTransaction()
+    {
+        try
+        {
+            _currentTransaction?.Rollback();
+        }
+        finally
+        {
+            if (_currentTransaction != null)
+            {
+                _currentTransaction.Dispose();
+                _currentTransaction = null;
+            }
+        }
+    }
+
 }

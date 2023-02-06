@@ -1,5 +1,3 @@
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.ConfigKestrel();
@@ -18,8 +16,17 @@ builder.Services.RegisterInfrastructureServices();
 
 builder.Services.AddCatalogDbContext(builder.Configuration);
 
+builder.Services.AddIntegrationEventLogDbContext(builder.Configuration);
+
 builder.Services.RegisterMasstransitService();
 
+builder.Services.Configure<CatalogSetting>(builder.Configuration);
+
+builder.Services.AddIntegrationEventLogService();
+
+builder.Services.AddHostedService<IntegrationEventPublishWorker>();
+
+builder.Services.RegisterBehaviors();
 
 var app = builder.Build();
 
@@ -30,6 +37,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.CatalogMigrateAndSeed().Wait();
+
+app.IntegrationEventLogMigrate().Wait();
 
 app.GrpcConfig();
 

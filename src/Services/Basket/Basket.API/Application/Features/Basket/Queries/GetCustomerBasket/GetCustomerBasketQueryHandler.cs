@@ -30,10 +30,10 @@ public class GetCustomerBasketQueryHandler : IRequestHandler<GetCustomerBasketQu
             BuyerId = basket.BuyerId
         };
 
-        foreach (var item in customerBasketVM.BasketItems)
-        {
-            item.UnitPrice = (decimal) await _catalogService.GetCatalogPrice(item.ProductId);
-        }
+        //foreach (var item in customerBasketVM.BasketItems)
+        //{
+        //    item.UnitPrice = (decimal) await _catalogService.GetCatalogPrice(item.ProductId);
+        //}
 
         return customerBasketVM;
 

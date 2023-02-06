@@ -33,6 +33,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Integration", "BuildingBlocks\Integration\Common.Integration\Common.Integration.csproj", "{F52822B6-A5D4-4CA7-B843-6FF948BD320D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationEventEF", "BuildingBlocks\IntegrationEventEF\IntegrationEventEF.csproj", "{8858ABD1-C122-4CBF-863A-014CD1D847B9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{F52822B6-A5D4-4CA7-B843-6FF948BD320D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F52822B6-A5D4-4CA7-B843-6FF948BD320D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F52822B6-A5D4-4CA7-B843-6FF948BD320D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8858ABD1-C122-4CBF-863A-014CD1D847B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8858ABD1-C122-4CBF-863A-014CD1D847B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8858ABD1-C122-4CBF-863A-014CD1D847B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8858ABD1-C122-4CBF-863A-014CD1D847B9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -89,6 +95,7 @@ Global
 		{5CA133F6-2960-446D-B228-1A4C66FBCDD1} = {E4761F93-812D-44B7-A5AC-5707918FB3DF}
 		{2A394AD5-2ECC-4DB0-AD33-E115D7588F03} = {ABF44981-6C55-4EAF-B710-A0914858EC89}
 		{F52822B6-A5D4-4CA7-B843-6FF948BD320D} = {2A394AD5-2ECC-4DB0-AD33-E115D7588F03}
+		{8858ABD1-C122-4CBF-863A-014CD1D847B9} = {2A394AD5-2ECC-4DB0-AD33-E115D7588F03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {001D4B00-B0FA-47C5-BD1C-A5F2330A0D3C}
