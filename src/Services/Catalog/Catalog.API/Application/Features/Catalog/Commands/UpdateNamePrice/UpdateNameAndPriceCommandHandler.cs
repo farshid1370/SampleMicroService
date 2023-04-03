@@ -1,7 +1,7 @@
 ﻿
 namespace Catalog.API.Application.Features.Catalog.Commands.UpdateNamePrice;
 
-public class UpdateNameAndPriceCommandHandler:IRequestHandler<UpdateNameAndPriceCommand>
+public class UpdateNameAndPriceCommandHandler:IRequestHandler<UpdateNameAndPriceCommand,Unit>
 {
     private readonly ICatalogRepository _catalogRepository;
 

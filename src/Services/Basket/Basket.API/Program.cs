@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.RegisterSwaggerService();
 
-builder.Services.AddMediatR(Assembly.GetExecutingAssembly());
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Program).Assembly));
 
 builder.Services.RegisterInfrastructureServices();
 

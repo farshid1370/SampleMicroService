@@ -1,6 +1,6 @@
 ﻿namespace Basket.API.Application.Features.Basket.Commands.UpdateBasketCatalogPrice;
 
-public class UpdateBasketCatalogPriceCommandHandler : IRequestHandler<UpdateBasketCatalogPriceCommand>
+public class UpdateBasketCatalogPriceCommandHandler : IRequestHandler<UpdateBasketCatalogPriceCommand,Unit>
 {
     private readonly IBasketRepository _repository;
 

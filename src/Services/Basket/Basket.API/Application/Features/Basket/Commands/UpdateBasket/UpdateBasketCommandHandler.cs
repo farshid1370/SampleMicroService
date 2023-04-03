@@ -1,6 +1,6 @@
 ﻿namespace Basket.API.Application.Features.Basket.Commands.UpdateBasket;
 
-public class UpdateBasketCommandHandler:IRequestHandler<UpdateBasketCommand>
+public class UpdateBasketCommandHandler:IRequestHandler<UpdateBasketCommand,Unit>
 {
     private readonly IBasketRepository _repository;
 
