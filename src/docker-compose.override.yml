@@ -4,6 +4,13 @@ services:
   catalogAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - KEYCLOAK__AuthServerUrl=http://keycloak:8080
+      - KEYCLOAK__Realm=hcm-dev
+      - KEYCLOAK__SslRequired=false
+      - KEYCLOAK__Resource=my-client
+      - KEYCLOAK__VerifyTokenAudience=false
+      - KEYCLOAK__ConfidentialPort=0
+      - KEYCLOAK__Credentials__Secret=ygzvyBvpJ2xFAKh00YfPbkL5dxTPob9p
       - ConnectionString=Server=catalogDB;Database=CatalogDB;User Id=admin;Password=admin1234;
       - CheckUpdateTimeForEventPublinshWorker=5000
     ports:
@@ -23,6 +30,7 @@ services:
   basketAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - Keycloak_url=keycloak
       - ConnectionString=Server=basketDB;Database=BasketDB;User Id=admin;Password=admin1234;
       - CatalogGrpcUrl=http://catalogAPI:81/
     ports:
@@ -44,8 +52,42 @@ services:
       - "15672:15672"
       - "5672:5672"
 
+  keycloakDB:
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin1234
+      - POSTGRES_DB=keycloak
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - keycloakDbData:/var/lib/postgresql/data/
+      #- ./keycloak/createdb.sql:/docker-entrypoint-initdb.d/createdb.sql:ro
+    #command: "sh /docker-entrypoint-initdb.d/init-keycloak-db.sh"
+
+  keycloak:
+    environment:
+      - KEYCLOAK_ADMIN_USER=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KEYCLOAK_DATABASE_VENDOR=postgresql
+      - KEYCLOAK_DATABASE_HOST=keycloakDB
+      - KEYCLOAK_DATABASE_PORT=5432
+      - KEYCLOAK_DATABASE_NAME=keycloak
+      - KEYCLOAK_DATABASE_USER=admin
+      - KEYCLOAK_DATABASE_PASSWORD=admin1234
+    restart: always
+    depends_on:
+      - "keycloakDB"
+    ports:
+      - "8080:8080"
+    volumes:
+      - keycloakDbData:/var/lib/postgresql/data/
+
+
 volumes:
   catalogDbData:
     external: false
   basketDbData:
+    external: false
+  keycloakDbData:
     external: false

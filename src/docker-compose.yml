@@ -30,3 +30,12 @@ services:
 
   rabbitmq:
     image: masstransit/rabbitmq
+    
+  keycloak:
+    image: bitnami/keycloak:latest
+
+  keycloakDB:
+    image: postgres
+    container_name: keycloakDB
+
+

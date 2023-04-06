@@ -15,5 +15,7 @@
     </None>
     <None Include="docker-compose.yml" />
     <None Include=".dockerignore" />
+    <None Include="keycloak\createdb.sql" />
+    <None Include="keycloak\init-keycloak-db.sh" />
   </ItemGroup>
 </Project>

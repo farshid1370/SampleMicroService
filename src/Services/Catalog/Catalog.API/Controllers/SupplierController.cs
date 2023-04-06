@@ -1,5 +1,8 @@
 ﻿
 
+using Catalog.API.Application.Features.Catalog.Queries.GetSuppliersList;
+using Microsoft.AspNetCore.Authorization;
+
 namespace Catalog.API.Controllers;
 
 [Route("api/[controller]")]
@@ -23,5 +26,20 @@ public class SupplierController : ControllerBase
     {
         var supplier = await _mediator.Send(new GetSupplierQuery() { SupplierId = id });
         return Ok(supplier);
+    }
+
+
+    /// <summary>
+    /// Get supplier list with paging
+    /// </summary>
+    /// <param name="pageNumber"></param>
+    /// <param name="pageSize"></param>
+    /// <returns></returns>
+    [Authorize]
+    [HttpGet("{pageNumber}/{pageSize}")]
+    public async Task<IActionResult> GetSuppliersList(int pageNumber, int pageSize)
+    {
+        var supplierList = await _mediator.Send(new GetSuppliersListQuery { PageNumber = pageNumber, PageSize = pageSize });
+        return Ok(supplierList);
     }
 }

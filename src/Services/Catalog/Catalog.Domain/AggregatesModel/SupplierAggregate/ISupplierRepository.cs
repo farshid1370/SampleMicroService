@@ -6,4 +6,7 @@ public interface ISupplierRepository : IRepository<Supplier>
     void Update(Supplier item);
     Task<IEnumerable<Supplier>> GetByType(Guid typeId);
     Task<Supplier> GetById(Guid id);
+    Task<int> GetTotalCount();
+    Task<IEnumerable<Supplier>> GetByPaging(int pageSize, int PageNumber);
+
 }

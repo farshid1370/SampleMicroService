@@ -36,4 +36,20 @@ public class SupplierRepository : ISupplierRepository
         }
         return item;
     }
+
+    public async Task<int> GetTotalCount()
+    {
+        var totalItems = await _context.Suppliers.CountAsync();
+        return totalItems;
+    }
+
+    public async Task<IEnumerable<Supplier>> GetByPaging(int pageSize, int PageNumber)
+    {
+        var itemsOnPage = await _context.Suppliers
+            .OrderBy(c => c.Name)
+            .Skip(pageSize * (PageNumber - 1))
+            .Take(pageSize)
+            .ToListAsync();
+        return itemsOnPage;
+    }
 }

@@ -1,0 +1,3 @@
+CREATE DATABASE keycloak
+
+CREATE USER keycloak WITH PASSWORD 'kc'

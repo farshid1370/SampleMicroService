@@ -13,7 +13,7 @@ public class CatalogItem : Entity, IAggregateRoot
     {
         _id= id;
         _name = string.IsNullOrEmpty(name) ? throw new CatalogDomainException("The name is empty and must be entered") : name;
-        _price = price <= 0 ? throw new CatalogDomainException("The price must be than 0.") : price;
+        _price = price <= 0 ? throw new CatalogDomainException("The price must be greater than 0.") : price;
         _catalogTypeId = catalogTypeId;
         _availableStock = availableStock;
         if (maxStockThreshold < availableStock)
