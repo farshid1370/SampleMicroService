@@ -30,7 +30,13 @@ services:
   basketAPI:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - Keycloak_url=keycloak
+      - KEYCLOAK__AuthServerUrl=http://keycloak:8080
+      - KEYCLOAK__Realm=hcm-dev
+      - KEYCLOAK__SslRequired=false
+      - KEYCLOAK__Resource=my-client
+      - KEYCLOAK__VerifyTokenAudience=false
+      - KEYCLOAK__ConfidentialPort=0
+      - KEYCLOAK__Credentials__Secret=ygzvyBvpJ2xFAKh00YfPbkL5dxTPob9p
       - ConnectionString=Server=basketDB;Database=BasketDB;User Id=admin;Password=admin1234;
       - CatalogGrpcUrl=http://catalogAPI:81/
     ports:

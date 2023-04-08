@@ -1,4 +1,14 @@
+using Basket.API;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.Configure<BasketSettings>(builder.Configuration);
+
+var options = builder.Configuration.Get<BasketSettings>();
+
+builder.Services.RegisterKeyCloak(options);
+
+builder.Services.RegisterSwaggerService();
 
 builder.ConfigKestrel();
 
@@ -22,7 +32,7 @@ var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    app.SwaggerConfig();
+    app.SwaggerConfig(options);
 
 }
 
